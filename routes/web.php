@@ -15,6 +15,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // profile
 
 Route::get("/home/profile",[ProfileController::class,'index'])->name('home.profile');
+Route::post("/home/profile/name/update",[ProfileController::class,'name_update'])->name('home.profile.name.update');
+Route::post("/home/profile/password/update",[ProfileController::class,'password_update'])->name('home.profile.password.update');
+Route::post("/home/profile/image/update",[ProfileController::class,'image_update'])->name('home.profile.image.update');
 
 
 
