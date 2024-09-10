@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('dashboard') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
     <script src="{{ asset('dashboard') }}/assets/js/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -63,10 +64,27 @@
                     <li class="menu-title">Custom</li>
 
                     <li class="menu-item">
-                        <a class='menu-link waves-effect waves-light' href='{{ route('home.profile') }}'>
+                        <a class='menu-link waves-effect waves-light' href="{{ route('home.profile') }}">
                             <span class="menu-icon"><i class="fa-regular fa-face-smile"></i></span>
                             <span class="menu-text"> Profile </span>
                         </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="#menucategory" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
+                            <span class="menu-icon"><i class="bx bx-file"></i></span>
+                            <span class="menu-text"> Categories </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="menucategory">
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a class='menu-link' href='{{ route('category.index') }}'>
+                                        <span class="menu-text">Show Categories</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="menu-item">
@@ -453,6 +471,7 @@
     <!-- END wrapper -->
 
     <!-- App js -->
+
     <script src="{{ asset('dashboard') }}/assets/js/vendor.min.js"></script>
     <script src="{{ asset('dashboard') }}/assets/js/app.js"></script>
 
@@ -468,7 +487,10 @@
 
     <!-- Dashboard init-->
     <script src="{{ asset('dashboard') }}/assets/js/pages/dashboard.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+
+    @yield('script')
 </body>
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,11 @@ Route::get("/home/profile",[ProfileController::class,'index'])->name('home.profi
 Route::post("/home/profile/name/update",[ProfileController::class,'name_update'])->name('home.profile.name.update');
 Route::post("/home/profile/password/update",[ProfileController::class,'password_update'])->name('home.profile.password.update');
 Route::post("/home/profile/image/update",[ProfileController::class,'image_update'])->name('home.profile.image.update');
+
+// category
+
+Route::get('/category',[CategoryController::class,'index'])->name('category.index');
+Route::post('/category/store',[CategoryController::class,'store'])->name('category.store');
 
 
 
