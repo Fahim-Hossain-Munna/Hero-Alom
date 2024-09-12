@@ -33,7 +33,14 @@
                                     <td>
                                         <a class="badge bg-danger">{{ $category->status }}</a>
                                     </td>
-                                    <td>@mdo</td>
+                                    <td>
+                                        <a href="{{ route('category.edit',$category->slug) }}" class="btn btn-info btn-sm">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="{{ route('category.delete',$category->slug) }}" class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -24,6 +24,9 @@ Route::post("/home/profile/image/update",[ProfileController::class,'image_update
 
 Route::get('/category',[CategoryController::class,'index'])->name('category.index');
 Route::post('/category/store',[CategoryController::class,'store'])->name('category.store');
+Route::get('/category/edit/{sumon}',[CategoryController::class,'edit'])->name('category.edit');
+Route::post('/category/update/{slug}',[CategoryController::class,'update'])->name('category.update');
+Route::get('/category/delete/{slug}',[CategoryController::class,'delete'])->name('category.delete');
 
 
 
