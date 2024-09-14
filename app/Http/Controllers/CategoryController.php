@@ -131,4 +131,26 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('category_success','Category Delete Successfull');
 
     }
+
+    public function status($slug){
+        $category = Category::where('slug',$slug)->first();
+
+
+        if($category->status == 'active'){
+            Category::find($category->id)->update([
+                'status' => 'deactive',
+                'updated_at' => now(),
+            ]);
+        return redirect()->route('category.index')->with('category_success','Category Status Change Successfull');
+
+        }else{
+            Category::find($category->id)->update([
+                'status' => 'active',
+                'updated_at' => now(),
+            ]);
+        return redirect()->route('category.index')->with('category_success','Category Status Change Successfull');
+
+        }
+
+    }
 }

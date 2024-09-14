@@ -13,5 +13,6 @@ class Category extends Model
         'title',
         'slug',
         'image',
+        'status',
     ];
 }
