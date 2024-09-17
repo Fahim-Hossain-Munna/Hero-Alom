@@ -17,9 +17,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // management
 
-Route::get('/management', [ManagementController::class, 'index'])->name('management.index');
-Route::post('/management/user/register', [ManagementController::class, 'store_register'])->name('management.store');
-Route::post('/management/user/manager/down/{id}', [ManagementController::class, 'manager_down'])->name('management.down');
+Route::prefix(env('HOST_NAME'))->middleware(['rolecheck'])->group(function(){
+    Route::get('/management', [ManagementController::class, 'index'])->name('management.index');
+    Route::post('/management/user/register', [ManagementController::class, 'store_register'])->name('management.store');
+    Route::post('/management/user/manager/down/{id}', [ManagementController::class, 'manager_down'])->name('management.down');
+
+    //role
+    Route::get('/management/role', [ManagementController::class, 'role_index'])->name('management.role.index');
+    Route::post('/management/role/assign', [ManagementController::class, 'role_assign'])->name('management.role.assign');
+    Route::post('/management/role/undo/blogger/{id}', [ManagementController::class, 'blogger_grade_down'])->name('management.role.blogger.down');
+    Route::post('/management/role/undo/user/{id}', [ManagementController::class, 'user_grade_down'])->name('management.role.user.down');
+
+});
+
+
 
 // profile
 

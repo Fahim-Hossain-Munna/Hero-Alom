@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ManagementController extends Controller
 {
@@ -49,4 +50,70 @@ class ManagementController extends Controller
 
         }
     }
+
+
+
+    // role manage
+
+    public function role_index(){
+        $bloggers = User::where('role','blogger')->get();
+        $users = User::where('role','user')->where('block',false)->get();
+        return view('dashboard.management.role.index',[
+            'dustotanvir' => $users,
+            'bloggers' => $bloggers,
+        ]);
+    }
+
+    public function role_assign(Request $request){
+
+        $request->validate([
+            'role' => 'required|in:manager,blogger,user',
+        ]);
+
+        $user = User::where('id',$request->user_id)->first();
+
+        User::find($user->id)->update([
+            'role' => $request->role,
+            'updated_at' => now(),
+        ]);
+
+        Session::flash('assignrole','Role Assign Successfull');
+
+        return back();
+
+    }
+
+
+    public function blogger_grade_down($id){
+        $user = User::where('id',$id)->first();
+
+        if($user->role == 'blogger'){
+            User::find($user->id)->update([
+                'role' => 'user',
+                'updated_at' => now(),
+            ]);
+            Session::flash('assignrole','Role Down Successfull');
+
+            return back();
+        }
+    }
+
+
+    public function user_grade_down($id){
+        $user = User::where('id',$id)->first();
+
+
+        if($user->role == 'user'){
+            User::find($user->id)->update([
+                'block' => true,
+                'updated_at' => now(),
+            ]);
+            Session::flash('assignrole','Block This User Successfull');
+
+            return back();
+        }
+    }
+
+
+
 }
