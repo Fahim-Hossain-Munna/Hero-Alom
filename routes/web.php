@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -48,5 +49,8 @@ Route::post('/category/update/{slug}',[CategoryController::class,'update'])->nam
 Route::get('/category/delete/{slug}',[CategoryController::class,'delete'])->name('category.delete');
 Route::post('/category/status/{slug}',[CategoryController::class,'status'])->name('category.status');
 
+// blog
+
+Route::resource('/blog',BlogController::class);
 
 
