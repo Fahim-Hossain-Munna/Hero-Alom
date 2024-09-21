@@ -21,7 +21,8 @@
                                 <th>#</th>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Description</th>
+                                <th>Category Title</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,18 +36,21 @@
                                         <img src="{{ asset('uploads/blog') }}/{{ $blog->thumbnail }}" style="width:80px; height:80px;">
                                     </td>
                                     <td>{{ $blog->title }}</td>
+                                    <td>{{ $blog->onecategory->title }}</td>
                                     <td>
-                                        {!! $blog->description !!}
-                                    {{-- <form id="heroalam{{ $blog->id }}" action="{{ route('category.status',$blog->slug) }}" method="POST">
+                                    <form id="heroalam{{ $blog->id }}" action="{{ route('category.status',$blog->slug) }}" method="POST">
                                         @csrf
                                         <div class="form-check form-switch">
                                             <input onchange="document.querySelector('#heroalam{{ $blog->id }}').submit()" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ $blog->status == 'active' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexSwitchCheckChecked">{{ $blog->status }}</label>
                                         </div>
-                                    </form> --}}
+                                    </form>
                                     </td>
                                     <td>
-                                        <a href="{{ route('category.edit',$blog->slug) }}" class="btn btn-info btn-sm">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#showSumon{{ $blog->id }}" class="btn btn-info btn-sm">
+                                            <i class="fa-solid fa-face-grin-tongue-wink"></i>
+                                        </a>
+                                        <a href="{{ route('blog.edit',$blog->id) }}" class="btn btn-info btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="{{ route('category.delete',$blog->slug) }}" class="btn btn-danger btn-sm">
@@ -54,8 +58,25 @@
                                         </a>
                                     </td>
                                 </tr>
+
+                                <!-- Modal -->
+                            <div class="modal fade" id="showSumon{{ $blog->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ $blog->id }} - {{ $blog->title }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2>Title - {{ $blog->title }}</h2>
+                                        <p>Description - {!! $blog->description !!}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
+                        {{ $blogs->links() }}
                     </table>
                 </div> <!-- end table-responsive-->
             </div>
